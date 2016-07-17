@@ -3,6 +3,7 @@ package modular
 
 import "github.com/Sirupsen/logrus"
 
+// NewRootLogger creates a new root logger, that wraps the passed logrus.Logger
 func NewRootLogger(logger *logrus.Logger) RootLogger {
 	loggerLevel := logger.Level
 	logger.Level = logrus.DebugLevel

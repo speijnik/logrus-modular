@@ -156,8 +156,8 @@ func TestLoggerModule_GetLevel(t *testing.T) {
 
 func TestLoggerModule_SetLevel(t *testing.T) {
 	lm := &loggerModule{
-		name: "test.module",
-		level: logrus.FatalLevel,
+		name:     "test.module",
+		level:    logrus.FatalLevel,
 		children: make(map[string]*loggerModule),
 	}
 	require.EqualValues(t, logrus.FatalLevel, lm.GetLevel())

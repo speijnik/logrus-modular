@@ -2,6 +2,7 @@ package modular
 
 import (
 	"testing"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 )

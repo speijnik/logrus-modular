@@ -16,7 +16,7 @@ type loggerModule struct {
 	levelMutex sync.Mutex
 	level      logrus.Level
 
-	root   RootLogger
+	root RootLogger
 
 	childrenMutex sync.Mutex
 	children      map[string]*loggerModule

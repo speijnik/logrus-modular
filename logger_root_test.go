@@ -37,3 +37,19 @@ func TestLoggerRoot_SetModuleField(t *testing.T) {
 	rl.SetModuleField("")
 	require.EqualValues(t, DefaultModuleField, rl.GetModuleField())
 }
+
+func TestLoggerRoot_GetOrCreateChild(t *testing.T) {
+	rl := NewRootLogger(logrus.New())
+	require.NotNil(t, rl)
+	moduleLogger := rl.GetOrCreateChild("test", logrus.DebugLevel)
+	require.NotNil(t, moduleLogger)
+	require.EqualValues(t, logrus.DebugLevel, moduleLogger.GetLevel())
+	require.EqualValues(t, "test", moduleLogger.GetModuleName())
+
+	// Test nesting
+	nestedModuleLogger := moduleLogger.GetOrCreateChild("nested", logrus.ErrorLevel)
+	require.NotNil(t, nestedModuleLogger)
+	require.EqualValues(t, logrus.ErrorLevel, nestedModuleLogger.GetLevel())
+	require.EqualValues(t, "test.nested", nestedModuleLogger.GetModuleName())
+
+}

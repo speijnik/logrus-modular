@@ -104,6 +104,10 @@ func (lm *loggerModule) createChild(moduleName string, defaultLevel logrus.Level
 	}
 
 	localModuleName, childModuleName := lm.getLocalChildNames(moduleName)
+	fullLocalModuleName := localModuleName
+	if lm.name != "" {
+		fullLocalModuleName = strings.Join([]string{lm.name, localModuleName}, ".")
+	}
 
 	childModule, ok := lm.children[localModuleName]
 
@@ -118,7 +122,7 @@ func (lm *loggerModule) createChild(moduleName string, defaultLevel logrus.Level
 		loggerBase: loggerBase{
 			fields: make(logrus.Fields, 5),
 		},
-		name:     strings.Join([]string{lm.name, localModuleName}, "."),
+		name:     fullLocalModuleName,
 		root:     lm.root,
 		level:    defaultLevel,
 		children: make(map[string]*loggerModule, 1),

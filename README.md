@@ -2,6 +2,7 @@ speijnik/logrus-modular
 ===
 [![GoDoc](https://godoc.org/github.com/speijnik/logrus-modular?status.svg)](https://godoc.org/github.com/speijnik/logrus-modular)
 [![Build Status](https://travis-ci.org/speijnik/logrus-modular.svg?branch=master)](https://travis-ci.org/speijnik/logrus-modular)
+[![codecov](https://codecov.io/gh/speijnik/logrus-modular/branch/master/graph/badge.svg)](https://codecov.io/gh/speijnik/logrus-modular)
 
 Package `speijnik/logrus-modular` implements modular logging for logrus.
 

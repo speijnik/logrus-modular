@@ -6,9 +6,7 @@ import (
 	"errors"
 
 	"bytes"
-	"encoding/gob"
-
-	"io"
+	"encoding/json"
 
 	"github.com/Sirupsen/logrus"
 	"github.com/stretchr/testify/require"
@@ -207,35 +205,6 @@ func TestLoggerBase_NewEntry(t *testing.T) {
 	require.EqualValues(t, "test_module", entry.Data["module"])
 }
 
-var _ logrus.Formatter = (*gobFormatter)(nil)
-
-type gobFormatter struct {
-}
-
-func (gf *gobFormatter) Format(entry *logrus.Entry) ([]byte, error) {
-	buffer := bytes.Buffer{}
-	encoder := gob.NewEncoder(&buffer)
-	logger := entry.Logger
-	entry.Logger = nil
-	defer func() {
-		entry.Logger = logger
-	}()
-	if err := encoder.Encode(entry); err != nil {
-		return nil, err
-	}
-
-	return buffer.Bytes(), nil
-}
-
-func (gf gobFormatter) Decode(reader io.Reader) (*logrus.Entry, error) {
-	decoder := gob.NewDecoder(reader)
-	entry := new(logrus.Entry)
-	if err := decoder.Decode(entry); err != nil {
-		return nil, err
-	}
-	return entry, nil
-}
-
 func testLogFunction(t *testing.T, level logrus.Level, expectedMessage string, logFn func(*loggerBase)) {
 	buffer := bytes.NewBufferString("")
 
@@ -255,7 +224,7 @@ func testLogFunction(t *testing.T, level logrus.Level, expectedMessage string, l
 			root: &loggerRoot{
 				logger: &logrus.Logger{
 					Out:       buffer,
-					Formatter: &gobFormatter{},
+					Formatter: &logrus.JSONFormatter{},
 					Level:     logrus.DebugLevel,
 				},
 				moduleField: "module",
@@ -266,17 +235,15 @@ func testLogFunction(t *testing.T, level logrus.Level, expectedMessage string, l
 	// Check if logging works
 	logFn(lb)
 	require.NotEmpty(t, buffer.Bytes())
-	entry, err := gobFormatter{}.Decode(buffer)
 
+	var data map[string]interface{}
+	require.NoError(t, json.Unmarshal(buffer.Bytes(), &data))
+
+	require.EqualValues(t, expectedMessage, data["msg"])
+	require.EqualValues(t, "test_module", data["module"])
+	lvl, err := logrus.ParseLevel(data["level"].(string))
 	require.NoError(t, err)
-	require.NotNil(t, entry)
-
-	require.EqualValues(t, expectedMessage, entry.Message)
-	require.NotNil(t, entry.Data)
-	require.Len(t, entry.Data, 1)
-	require.Contains(t, entry.Data, "module")
-	require.EqualValues(t, "test_module", entry.Data["module"])
-	require.EqualValues(t, level, entry.Level)
+	require.EqualValues(t, level, lvl)
 
 	if level != logrus.PanicLevel {
 		ignoredLevel := logrus.PanicLevel

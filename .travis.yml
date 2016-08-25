@@ -6,7 +6,6 @@ matrix:
     - go: 1.5
     - go: 1.6
     - go: 1.7
-    - go: tip
 
 before_install:
   - go get golang.org/x/tools/cmd/cover
@@ -19,6 +18,7 @@ script:
   - diff -u <(echo -n) <(gofmt -d .)
   - go tool vet .
   - go test -v -coverprofile=coverage.txt -covermode=atomic
+  - go run ./examples/simple/simple.go
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

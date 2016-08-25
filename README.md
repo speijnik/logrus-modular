@@ -1,8 +1,8 @@
 speijnik/logrus-modular
 ===
 [![GoDoc](https://godoc.org/github.com/speijnik/logrus-modular?status.svg)](https://godoc.org/github.com/speijnik/logrus-modular)
-[![Build Status](https://travis-ci.org/speijnik/logrus-modular.svg?branch=master)](https://travis-ci.org/speijnik/logrus-modular)
-[![codecov](https://codecov.io/gh/speijnik/logrus-modular/branch/master/graph/badge.svg)](https://codecov.io/gh/speijnik/logrus-modular)
+[![Build Status](https://travis-ci.org/speijnik/logrus-modular.svg?branch=v1)](https://travis-ci.org/speijnik/logrus-modular)
+[![codecov](https://codecov.io/gh/speijnik/logrus-modular/branch/v1/graph/badge.svg)](https://codecov.io/gh/speijnik/logrus-modular)
 
 Package `speijnik/logrus-modular` implements modular logging for logrus.
 
@@ -17,7 +17,7 @@ such logger groups.
 With a [correctly configured](https://golang.org/doc/install#testing) Go toolchain:
 
 ```sh
-go get -u github.com/speijnik/logrus-modular
+go get -u gopkg.in/speijnik/logrus-modular.v1
 ```
 
 ## Examples
@@ -29,7 +29,7 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/speijnik/logrus-modular"
+	"gopkg.in/speijnik/logrus-modular.v1"
 )
 
 func main() {

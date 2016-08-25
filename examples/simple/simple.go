@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/speijnik/logrus-modular"
+	"gopkg.in/speijnik/logrus-modular.v1"
 )
 
 func main() {

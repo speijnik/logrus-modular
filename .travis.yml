@@ -8,6 +8,10 @@ matrix:
     - go: 1.7
     - go: tip
 
+before_install:
+  - go get github.com/mattn/goveralls
+  - go get golang.org/x/tools/cmd/cover
+
 install:
   - # Skip
 
@@ -15,4 +19,7 @@ script:
   - go get -t -v ./...
   - diff -u <(echo -n) <(gofmt -d .)
   - go tool vet .
-  - go test -v -race ./...
+  - go test -v -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

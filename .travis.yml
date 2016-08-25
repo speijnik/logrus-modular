@@ -11,7 +11,9 @@ before_install:
   - go get golang.org/x/tools/cmd/cover
 
 install:
-  - # Skip
+  - mkdir -p $HOME/gopath/src/gopkg.in/speijnik
+  - mv $HOME/gopath/src/github.com/speijnik/logrus-modular $HOME/gopath/src/gopkg.in/speijnik/logrus-modular.v1
+  - cd $HOME/gopath/src/gopkg.in/speijnik/logrus-modular.v1
 
 script:
   - go get -t -v ./...

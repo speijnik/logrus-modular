@@ -3,7 +3,7 @@ package modular
 import (
 	"sync"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 // DefaultModuleField defines the default field to use for the module name

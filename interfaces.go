@@ -1,6 +1,6 @@
 package modular
 
-import "github.com/Sirupsen/logrus"
+import "github.com/sirupsen/logrus"
 
 // Logger defines the baseline logger interface
 type Logger interface {

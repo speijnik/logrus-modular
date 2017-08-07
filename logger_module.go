@@ -4,7 +4,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 var _ ModuleLogger = (*loggerModule)(nil)

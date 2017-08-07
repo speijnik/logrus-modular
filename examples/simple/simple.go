@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"gopkg.in/speijnik/logrus-modular.v1"
 )
 

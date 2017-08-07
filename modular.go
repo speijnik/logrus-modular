@@ -1,7 +1,7 @@
 // Package modular provides modular logging for logrus
 package modular
 
-import "github.com/Sirupsen/logrus"
+import "github.com/sirupsen/logrus"
 
 // NewRootLogger creates a new root logger, that wraps the passed logrus.Logger
 func NewRootLogger(logger *logrus.Logger) RootLogger {

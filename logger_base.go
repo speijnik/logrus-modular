@@ -1,6 +1,6 @@
 package modular
 
-import "github.com/Sirupsen/logrus"
+import "github.com/sirupsen/logrus"
 
 var _ Logger = (*loggerBase)(nil)
 

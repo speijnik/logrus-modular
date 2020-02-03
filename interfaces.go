@@ -11,6 +11,7 @@ type Logger interface {
 	// WithError extends the current logger's fields with an error field and returns a new logger
 	WithError(err error) Logger
 
+	Tracef(format string, args ...interface{})
 	Debugf(format string, args ...interface{})
 	Infof(format string, args ...interface{})
 	Printf(format string, args ...interface{})
@@ -20,6 +21,7 @@ type Logger interface {
 	Fatalf(format string, args ...interface{})
 	Panicf(format string, args ...interface{})
 
+	Trace(args ...interface{})
 	Debug(args ...interface{})
 	Info(args ...interface{})
 	Print(args ...interface{})
@@ -29,6 +31,7 @@ type Logger interface {
 	Fatal(args ...interface{})
 	Panic(args ...interface{})
 
+	Traceln(args ...interface{})
 	Debugln(args ...interface{})
 	Infoln(args ...interface{})
 	Println(args ...interface{})

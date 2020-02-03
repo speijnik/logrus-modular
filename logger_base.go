@@ -60,6 +60,12 @@ func (lb *loggerBase) newEntry(level logrus.Level) *logrus.Entry {
 	}
 }
 
+func (lb *loggerBase) Tracef(format string, args ...interface{}) {
+	if entry := lb.newEntry(logrus.TraceLevel); entry != nil {
+		entry.Tracef(format, args...)
+	}
+}
+
 func (lb *loggerBase) Debugf(format string, args ...interface{}) {
 	if entry := lb.newEntry(logrus.DebugLevel); entry != nil {
 		entry.Debugf(format, args...)
@@ -104,6 +110,12 @@ func (lb *loggerBase) Panicf(format string, args ...interface{}) {
 	}
 }
 
+func (lb *loggerBase) Trace(args ...interface{}) {
+	if entry := lb.newEntry(logrus.TraceLevel); entry != nil {
+		entry.Trace(args...)
+	}
+}
+
 func (lb *loggerBase) Debug(args ...interface{}) {
 	if entry := lb.newEntry(logrus.DebugLevel); entry != nil {
 		entry.Debug(args...)
@@ -145,6 +157,12 @@ func (lb *loggerBase) Fatal(args ...interface{}) {
 func (lb *loggerBase) Panic(args ...interface{}) {
 	if entry := lb.newEntry(logrus.PanicLevel); entry != nil {
 		entry.Panic(args...)
+	}
+}
+
+func (lb *loggerBase) Traceln(args ...interface{}) {
+	if entry := lb.newEntry(logrus.TraceLevel); entry != nil {
+		entry.Traceln(args...)
 	}
 }
 

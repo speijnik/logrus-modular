@@ -167,7 +167,27 @@ func TestLoggerModule_SetLevel(t *testing.T) {
 	require.NotNil(t, child)
 	require.EqualValues(t, logrus.InfoLevel, child.GetLevel())
 
+	lm.SetLevel(logrus.TraceLevel)
+	require.EqualValues(t, logrus.TraceLevel, lm.GetLevel())
+	require.EqualValues(t, logrus.TraceLevel, child.GetLevel())
+
 	lm.SetLevel(logrus.DebugLevel)
 	require.EqualValues(t, logrus.DebugLevel, lm.GetLevel())
 	require.EqualValues(t, logrus.DebugLevel, child.GetLevel())
+
+	lm.SetLevel(logrus.InfoLevel)
+	require.EqualValues(t, logrus.InfoLevel, lm.GetLevel())
+	require.EqualValues(t, logrus.InfoLevel, child.GetLevel())
+
+	lm.SetLevel(logrus.WarnLevel)
+	require.EqualValues(t, logrus.WarnLevel, lm.GetLevel())
+	require.EqualValues(t, logrus.WarnLevel, child.GetLevel())
+
+	lm.SetLevel(logrus.ErrorLevel)
+	require.EqualValues(t, logrus.ErrorLevel, lm.GetLevel())
+	require.EqualValues(t, logrus.ErrorLevel, child.GetLevel())
+
+	lm.SetLevel(logrus.FatalLevel)
+	require.EqualValues(t, logrus.FatalLevel, lm.GetLevel())
+	require.EqualValues(t, logrus.FatalLevel, child.GetLevel())
 }

@@ -209,6 +209,7 @@ func testLogFunction(t *testing.T, level logrus.Level, expectedMessage string, l
 	buffer := bytes.NewBufferString("")
 
 	levels := []logrus.Level{
+		logrus.TraceLevel,
 		logrus.DebugLevel,
 		logrus.InfoLevel,
 		logrus.WarnLevel,
@@ -225,7 +226,7 @@ func testLogFunction(t *testing.T, level logrus.Level, expectedMessage string, l
 				logger: &logrus.Logger{
 					Out:       buffer,
 					Formatter: &logrus.JSONFormatter{},
-					Level:     logrus.DebugLevel,
+					Level:     logrus.TraceLevel,
 				},
 				moduleField: "module",
 			},
@@ -262,6 +263,24 @@ func testLogFunction(t *testing.T, level logrus.Level, expectedMessage string, l
 		logFn(lb)
 		require.Empty(t, buffer.Bytes())
 	}
+}
+
+func TestLoggerBase_Trace(t *testing.T) {
+	testLogFunction(t, logrus.TraceLevel, "test", func(lb *loggerBase) {
+		lb.Trace("test")
+	})
+}
+
+func TestLoggerBase_Tracef(t *testing.T) {
+	testLogFunction(t, logrus.TraceLevel, "test: 1", func(lb *loggerBase) {
+		lb.Tracef("test: %d", 1)
+	})
+}
+
+func TestLoggerBase_Traceln(t *testing.T) {
+	testLogFunction(t, logrus.TraceLevel, "test", func(lb *loggerBase) {
+		lb.Traceln("test")
+	})
 }
 
 func TestLoggerBase_Debug(t *testing.T) {
